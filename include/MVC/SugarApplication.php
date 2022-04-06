@@ -50,7 +50,7 @@ if (!defined('sugarEntry') || !sugarEntry) {
  */
 require_once('include/MVC/Controller/ControllerFactory.php');
 require_once('include/MVC/View/ViewFactory.php');
-require_once('include/MVC/Responds/Respond.php');
+require_once('include/MVC/Responds/RespondFactory.php');
 require_once('include/MVC/Responds/RespondInterface.php');
 
 /**
