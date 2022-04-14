@@ -41,7 +41,7 @@
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
-
+use Symfony\Component\HttpFoundation\Request;
 /*
  * Created on Mar 21, 2007
  *
@@ -63,18 +63,28 @@ class SugarApplication
     public $headerDisplayed = false;
     public $default_module = 'Home';
     public $default_action = 'index';
-    public static SuiteCRM\MVC\Responds\RespondInterface $respond;
+    public static $respond;
+    public Request $request;
+    protected static string $StringRequest = '';
 
 
     public function __construct()
     {
+        require_once './vendor/autoload.php';
+        $this->request = Request::createFromGlobals();
     }
 
     public static function addRespond(\SuiteCRM\MVC\Responds\RespondInterface $respond ){
         static::$respond = $respond;
     }
+
     public static function getRespond(){
         return static::$respond;
+    }
+
+    public static function getStringRequest(): string
+    {
+        return static::$StringRequest;
     }
 
 
@@ -93,7 +103,7 @@ class SugarApplication
         }
         insert_charset_header();
         $this->setupPrint();
-        $this->controller = ControllerFactory::getController($module);
+        $this->controller = ControllerFactory::getController($this->request);
         // If the entry point is defined to not need auth, then don't authenticate.
         if (empty($_REQUEST['entryPoint']) || $this->controller->checkEntryPointRequiresAuth($_REQUEST['entryPoint'])) {
             $this->loadUser();
@@ -226,7 +236,7 @@ class SugarApplication
 
     public function setupPrint()
     {
-        $GLOBALS['request_string'] = '';
+        self::$StringRequest = '';
 
         // merge _GET and _POST, but keep the results local
         // this handles the issues where values come in one way or the other
@@ -240,13 +250,13 @@ class SugarApplication
                         continue;
                     }
 
-                    $GLOBALS['request_string'] .= urlencode($key) . '[' . $k . ']=' . urlencode($v) . '&';
+                    self::$StringRequest .= urlencode($key) . '[' . $k . ']=' . urlencode($v) . '&';
                 }
             } else {
-                $GLOBALS['request_string'] .= urlencode($key) . '=' . urlencode($val) . '&';
+                self::$StringRequest .= urlencode($key) . '=' . urlencode($val) . '&';
             }
         }
-        $GLOBALS['request_string'] .= 'print=true';
+        self::$StringRequest .= 'print=true';
     }
 
     public function preProcess()

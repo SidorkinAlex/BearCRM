@@ -181,6 +181,8 @@ class SugarController
      */
     public $hasAccess ;
 
+    public \SuiteCRM\MVC\RouteParser\RouteParser $routeParser;
+
     /**
      * Map case sensitive filenames to action.  This is used for linux/unix systems
      * where filenames are case sensitive
@@ -190,6 +192,7 @@ class SugarController
         'detailview' => 'DetailView',
         'listview' => 'ListView'
     );
+
 
     /**
      * Constructor. This ie meant to load up the module, action, record as well
@@ -208,10 +211,11 @@ class SugarController
      * on the controller.
      *
      */
-    public function setup($module = '')
+    public function setup(\SuiteCRM\MVC\RouteParser\RouteParser $routeParser)
     {
-        if (empty($module) && !empty($_REQUEST['module'])) {
-            $module = $_REQUEST['module'];
+        $this->routeParser = $routeParser;
+        if ($routeParser->getModule()) {
+            $module = $routeParser->getModule();
         }
         //set the module
         if (!empty($module)) {
@@ -247,24 +251,13 @@ class SugarController
      */
     private function loadPropertiesFromRequest()
     {
-        if (!empty($_REQUEST['action'])) {
-            $this->action = $_REQUEST['action'];
+        if (!empty($this->routeParser->getAction())) {
+            $this->action = $this->routeParser->getAction();
         }
-        if (!empty($_REQUEST['record'])) {
-            $this->record = $_REQUEST['record'];
+        if (!empty($this->routeParser->getRecord())) {
+            $this->record = $this->routeParser->getRecord();
         }
-        if (!empty($_REQUEST['view'])) {
-            $this->view = $_REQUEST['view'];
-        }
-        if (!empty($_REQUEST['return_module'])) {
-            $this->return_module = $_REQUEST['return_module'];
-        }
-        if (!empty($_REQUEST['return_action'])) {
-            $this->return_action = $_REQUEST['return_action'];
-        }
-        if (!empty($_REQUEST['return_id'])) {
-            $this->return_id = $_REQUEST['return_id'];
-        }
+        
     }
 
     /**
@@ -367,6 +360,8 @@ class SugarController
         } catch (Exception $e) {
             $this->handleException($e);
         }
+        $s = var_export($this,1);
+        //\SuiteCRM\MVC\Responds\RespondFactory::createRespond('html',"<pre>{$s}</pre>");
     }
 
     /**
@@ -419,7 +414,8 @@ class SugarController
             $this->module,
             $this->bean,
             $this->view_object_map,
-            $this->target_module
+            $this->target_module,
+            $this->routeParser
         );
         $GLOBALS['current_view'] = $view;
         if (!empty($this->bean) && !$this->bean->ACLAccess($view->type) && $view->type != 'list') {
@@ -429,7 +425,9 @@ class SugarController
         if (isset($this->errors)) {
             $view->errors = $this->errors;
         }
+       //print_array($view,1);
         $view->process();
+
     }
 
     /**
