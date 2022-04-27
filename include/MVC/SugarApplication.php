@@ -123,8 +123,9 @@ class SugarApplication
         $out = ob_get_contents();
         ob_end_clean();
         $respond = SugarApplication::getRespond();
-        if (($respond instanceof \SuiteCRM\MVC\Responds\RespondInterface) && (!$respond->is_empty())) {
+        if (($respond instanceof \SuiteCRM\MVC\Responds\RespondInterface)) {
             echo $respond->show();
+                var_dump(headers_list());
         } else {
             echo $out;
         }
