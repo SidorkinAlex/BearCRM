@@ -7,6 +7,7 @@ require_once 'include/MVC/Responds/AbstractRespond.php';
 require_once 'include/MVC/Responds/HTMLRespond.php';
 require_once 'include/MVC/Responds/RespondInterface.php';
 require_once 'include/MVC/Responds/JSONRespond.php';
+require_once 'include/MVC/Responds/RedirectRespond.php';
 
 class RespondFactory
 {
@@ -18,6 +19,9 @@ class RespondFactory
             break;
             case 'html':
                 $respond = new HTMLRespond($content, $code);
+                break;
+            case 'redirect':
+                $respond = new RedirectRespond($content);
                 break;
             default:
                 $respond = new HTMLRespond('', 500);
