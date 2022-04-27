@@ -125,7 +125,6 @@ class SugarApplication
         $respond = SugarApplication::getRespond();
         if (($respond instanceof \SuiteCRM\MVC\Responds\RespondInterface)) {
             echo $respond->show();
-                var_dump(headers_list());
         } else {
             echo $out;
         }
