@@ -988,5 +988,9 @@ $mod_strings = array(
     'LBL_ADMIN_TOOLS_HEADER_DESC' => 'Repair, upgrade and run diagnosis on your SuiteCRM instance',
     'LBL_WORKFLOW_MANAGER' => 'Workflow Manager',
     'LBL_WORKFLOW_MANAGER_DESC' => 'Manage, Add, delete or change Workflow processes',
-    
+    'LBL_KANBAN_TITLE' => 'Kanban Board Settings',
+    'LBL_KANBAN_DESC' => 'Configuring modules that use the kanban board',
+    'LBL_KANBAN_SETTINGS' => 'Configuring Modules for which a kanban board is available',
+    'LBL_KANBAN_SETTINGS_DESCRIPTION' => 'Configuring Modules for which a kanban board is available',
+
 );
