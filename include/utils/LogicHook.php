@@ -141,6 +141,12 @@ class LogicHook
     public function loadHooks($module_dir)
     {
         $hook_array = array();
+        if (file_exists("include/LogicHooks/LogicHooksCollection.php")) {
+            if (isset($GLOBALS['log'])) {
+                $GLOBALS['log']->debug('Including LogicHooksCollection ');
+            }
+            include("include/LogicHooks/LogicHooksCollection.php");
+        }
         if (!empty($module_dir)) {
             $custom = "custom/modules/$module_dir";
         } else {
