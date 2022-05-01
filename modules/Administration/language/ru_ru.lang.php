@@ -1033,12 +1033,10 @@ $mod_strings = array(
 'LBL_SYNCHRONOUS' => 'Синхронный',
 'LBL_ASYNCHRONOUS' => 'Асинхронный',
 'LBL_OUTPUT' => 'Ход выполнения',
-'LBL_RESULT' => 'Результат'
+'LBL_RESULT' => 'Результат',
+    'LBL_KANBAN_TITLE' => 'Настройки Канбан доски',
+    'LBL_KANBAN_DESC' => 'Настройка модулей, использующих Канбан доску',
+    'LBL_KANBAN_SETTINGS' => 'Настройка модулей, для которых доступно отображение в виде Канбан доски',
+    'LBL_KANBAN_SETTINGS_DESCRIPTION' => 'Настройка модулей, для которых доступно отображение в виде Канбан доски',
 
 );
-// TODO перевести настройки Канбан доски
-$mod_strings['LBL_KANBAN_TITLE'] = 'Kanban Board Settings';
-$mod_strings['LBL_KANBAN_DESC'] = 'Configuring modules that use the kanban board';
-
-$mod_strings['LBL_KANBAN_SETTINGS'] = 'Configuring Modules for which a kanban board is available';
-$mod_strings['LBL_KANBAN_SETTINGS_DESCRIPTION'] = 'Configuring Modules for which a kanban board is available';
