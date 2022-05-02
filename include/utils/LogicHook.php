@@ -141,12 +141,6 @@ class LogicHook
     public function loadHooks($module_dir)
     {
         $hook_array = array();
-        if (file_exists("include/LogicHooks/LogicHooksCollection.php")) {
-            if (isset($GLOBALS['log'])) {
-                $GLOBALS['log']->debug('Including LogicHooksCollection ');
-            }
-            include("include/LogicHooks/LogicHooksCollection.php");
-        }
         if (!empty($module_dir)) {
             $custom = "custom/modules/$module_dir";
         } else {
@@ -157,6 +151,7 @@ class LogicHook
                 $GLOBALS['log']->debug('Including module specific hook file for '.$custom);
             }
             include("$custom/logic_hooks.php");
+            print_array($hook_array,0,1);
         }
         if (empty($module_dir)) {
             $custom = "custom/application";
@@ -166,6 +161,12 @@ class LogicHook
                 $GLOBALS['log']->debug('Including Ext hook file for '.$custom);
             }
             include("$custom/Ext/LogicHooks/logichooks.ext.php");
+        }
+        if (file_exists("include/LogicHooks/LogicHooksCollection.php")) {
+            if (isset($GLOBALS['log'])) {
+                $GLOBALS['log']->debug('Including LogicHooksCollection ');
+            }
+            include("include/LogicHooks/LogicHooksCollection.php");
         }
         return $hook_array;
     }
