@@ -3968,6 +3968,7 @@ $app_list_strings['search_controllers'] = [
     'Search' => 'Расширенный поиск',
     'UnifiedSearch' => 'Стандартный поиск'
 ];
+$app_list_strings['moduleList']['BOARD'] = 'Канбан доска';
 
 $app_strings['LBL_DEFAULT_API_ERROR_TITLE'] = 'JSON API Error'; ////--> сообщения API не переводим
 $app_strings['LBL_DEFAULT_API_ERROR_DETAIL'] = 'JSON API Error occured.';
