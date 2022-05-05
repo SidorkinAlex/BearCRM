@@ -426,12 +426,32 @@ $admin_option_defs['jjwg_Maps']['address_cache'] = [
     'address-cache'
 ];
 
+$admin_option_defs = [
+    'Administration' => [
+        'kanban_board' => [
+            'Administration',
+            'LBL_KANBAN_SETTINGS',
+            'LBL_KANBAN_SETTINGS_DESCRIPTION',
+            'index.php?module=BOARD&action=moduleSettingsViews',
+            'kanban-board',
+        ],
+    ],
+];
+
 $admin_group_header[] = [
     'LBL_GOOGLE_SUITE_ADMIN_HEADER',
     '',
     false,
     $admin_option_defs,
     'LBL_GOOGLE_SUITE_ADMIN_DESC'
+];
+
+$admin_group_header[] = [
+    'LBL_KANBAN_TITLE',
+    '',
+    false,
+    $admin_option_defs,
+    'LBL_KANBAN_DESC',
 ];
 
 if (file_exists('custom/modules/Administration/Ext/Administration/administration.ext.php')) {

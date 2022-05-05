@@ -3674,6 +3674,8 @@ $app_list_strings['search_controllers'] = [
     'Search' => 'Search (new)',
     'UnifiedSearch' => 'Global Unified Search (legacy)'
 ];
+$app_list_strings['moduleList']['BOARD'] = 'Kanban Board';
+
 
 
 $app_strings['LBL_DEFAULT_API_ERROR_TITLE'] = 'JSON API Error';
