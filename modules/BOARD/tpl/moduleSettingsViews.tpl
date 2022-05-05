@@ -32,13 +32,13 @@
 <div style="height: 150px;"></div>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="custom/include/lib/bootstrap_select/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="include/lib/bootstrap_select/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="modules/BOARD/src/css/include.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="custom/include/lib/bootstrap_select/js/bootstrap-select.min.js"></script>
+<script src="include/lib/bootstrap_select/js/bootstrap-select.min.js"></script>
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="custom/include/lib/bootstrap_select/js/i18n/defaults-en_US.min.js"></script>
+<script src="include/lib/bootstrap_select/js/i18n/defaults-en_US.min.js"></script>
 
 

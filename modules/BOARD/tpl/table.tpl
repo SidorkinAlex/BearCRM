@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="custom/include/lib/jkanban/jkanban.min.css" />
-<script src="custom/include/lib/jkanban/jkanban.min.js"></script>
+<link rel="stylesheet" href="include/lib/jkanban/jkanban.min.css" />
+<script src="include/lib/jkanban/jkanban.min.js"></script>
 <div id="myKanban"></div>
 ]
 

@@ -1,11 +1,11 @@
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="custom/include/lib/bootstrap_select/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="include/lib/bootstrap_select/css/bootstrap-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="custom/include/lib/bootstrap_select/js/bootstrap-select.min.js"></script>
+<script src="include/lib/bootstrap_select/js/bootstrap-select.min.js"></script>
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="custom/include/lib/bootstrap_select/js/i18n/defaults-en_US.min.js"></script>
+<script src="include/lib/bootstrap_select/js/i18n/defaults-en_US.min.js"></script>
 
 <ul class="nav nav-tabs" id="myTab">
     {foreach from=$moduleListKanban key=iterations item=moduleName}
