@@ -251,7 +251,7 @@ class SugarView
         if ($this->_getOption('show_footer')) {
             $this->displayFooter();
         }
-        $GLOBALS['logic_hook']->call_custom_logic('', 'after_ui_footer');
+        $GLOBALS['logic_hook']->call_custom_logic('', 'after_ui_footer',['routeParser' => $this->routeParser]);
         if ($this->_getOption('json_output')) {
             $content = ob_get_clean();
             $module = $this->module;
