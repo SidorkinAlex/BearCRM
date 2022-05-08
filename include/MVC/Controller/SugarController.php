@@ -360,8 +360,6 @@ class SugarController
         } catch (Exception $e) {
             $this->handleException($e);
         }
-        $s = var_export($this,1);
-        //\SuiteCRM\MVC\Responds\RespondFactory::createRespond('html',"<pre>{$s}</pre>");
     }
 
     /**
