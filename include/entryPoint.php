@@ -71,11 +71,11 @@ if (file_exists($autoloader)) {
 if (is_file('config.php')) {
     require_once 'config.php'; // provides $sugar_config
 }
+$dotenv = Dotenv\Dotenv::create(getcwd());
+$dotenv->load();
+require_once 'include/SugarObjects/SugarConfig.php';
+$sugar_config = SugarConfig::initConf();
 
-// load up the config_override.php file.  This is used to provide default user settings
-if (is_file('config_override.php')) {
-    require_once 'config_override.php';
-}
 if (empty($GLOBALS['installing']) && empty($sugar_config['dbconfig']['db_name'])) {
     header('Location: install.php');
     exit();
