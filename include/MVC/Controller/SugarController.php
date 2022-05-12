@@ -423,7 +423,6 @@ class SugarController
         if (isset($this->errors)) {
             $view->errors = $this->errors;
         }
-       //print_array($view,1);
         $view->process();
 
     }
