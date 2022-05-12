@@ -149,6 +149,7 @@ class BOARD extends Basic
         global $current_user;
         $sow_stage=[];
         $this->checkOrInitBordFonfModule();
+        $where="";
         if(!empty($this->bordConfModule->stages)) {
             foreach ($this->bordConfModule->stages as $stage) {
                 if ($stage['show'] === true) {
@@ -156,7 +157,6 @@ class BOARD extends Basic
                 }
             }
             $order_by = "{$this->recipientBean->table_name}.{$this->bordConfModule->order_by} DESC";
-            $order_by = "{$this->bordConfModule->stages_field} DESC";
             if ($sow_stage) {
                 $in = "'" . implode("','", $sow_stage) . "'";
                 $where = "({$this->recipientBean->table_name}.{$this->bordConfModule->stages_field} in ({$in}))";
@@ -214,6 +214,7 @@ class BOARD extends Basic
 
 
         $order_by='date_entered DESC';
+        $where="";
         if($stage) {
             $in = "'" . implode("','",$stage) . "'";
             $where = '(opportunities.sales_stage in (' . $in . '))';
@@ -261,7 +262,7 @@ class BOARD extends Basic
     public function getDataOpp($request,$limitMin=null,$limitMax= null,User $user){
         require_once 'modules/BOARD/BOARD_USER_CONFIG.php';
         require_once 'modules/BOARD/helpers/BoardConfModuleToBeanRequest.php';
-        $whereArr = $request['where'];
+        $whereArr = $request['where'] ?? null;
         global $db;
         if(!empty($request['recipient_module'])) {
 
