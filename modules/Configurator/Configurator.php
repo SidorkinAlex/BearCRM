@@ -255,11 +255,23 @@ class Configurator
         }
         $overideString = [];
         //TODO подготовить массив для записи данных в $overideString
-
-        $this->saveOverride($overideString);
+        foreach($overrideArray as $key => $value){
+            if (is_array($value)){
+                $overideString[$key] = json_encode($value);
+            } elseif (is_object($value)){
+                $overideString[$key] = serialize($value);
+            } else {
+                $overideString[$key] = $value;
+            }
+        }
+        if (count($overideString) > 0) {
+            $this->saveOverride($overideString);
+        }
+        sugar_cache_clear("sugar_config");
         if (isset($this->config['logger']['level']) && $this->logger) {
             $this->logger->setLevel($this->config['logger']['level']);
         }
+        $sugar_config =$this->config;
     }
 
     /**
@@ -313,10 +325,12 @@ class Configurator
         return $sugar_config;
     }
 
-    public function saveOverride($override)
+    public function saveOverride(array $override)
     {
-        // TODO переделать под механизм записи данных в .env
-        // if value data in key is array then serialisation this to json
+        require_once 'include/utils/autoload/EnvDotEditor.php';
+        foreach ($override as $itemKey => $itemValue){
+            EnvDotEditor::saveENVConfig($itemKey,$itemValue);
+        }
     }
 
     public function overrideClearDuplicates($array_name, $key)
