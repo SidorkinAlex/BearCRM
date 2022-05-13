@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="include/lib/jkanban/jkanban.min.css" />
 <script src="include/lib/jkanban/jkanban.min.js"></script>
 <div id="myKanban"></div>
-]
+
 
 <div id="MyModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
