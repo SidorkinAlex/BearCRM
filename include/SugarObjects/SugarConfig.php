@@ -47,6 +47,49 @@ if (!defined('sugarEntry') || !sugarEntry) {
  */
 class SugarConfig
 {
+    const ENCODED = array (
+        0 => 'addAjaxBannedModules',
+        1 => 'anti_malware_scanners',
+        2 => 'aod',
+        3 => 'aop',
+        4 => 'aos',
+        5 => 'calendar',
+        6 => 'cron',
+        7 => 'dashlet_display_row_options',
+        8 => 'date_formats',
+        9 => 'dbconfig',
+        10 => 'dbconfigoption',
+        11 => 'default_permissions',
+        12 => 'filter_module_fields',
+        13 => 'jobs',
+        14 => 'languages',
+        15 => 'logger',
+        16 => 'name_formats',
+        17 => 'passwordsetting',
+        18 => 'pdf',
+        19 => 'resource_management',
+        20 => 'search',
+        21 => 'system_email_templates',
+        22 => 'time_formats',
+        23 => 'upload_badext',
+    );
+    public static function initConf(){
+        $config = [];
+        $config = $_ENV;
+        foreach ($config as $k => $v){
+            if ($v == 'true' ){
+                $config[$k] = true;
+            } elseif ($v == 'false'){
+                $config[$k] = false;
+            }
+        }
+        foreach (self::ENCODED as $decoded){
+            if(!empty($_ENV[$decoded])) {
+                $config[$decoded] = json_decode($_ENV[$decoded],1);
+            }
+        }
+        return $config;
+    }
     public $_cached_values = array();
 
     public static function getInstance()

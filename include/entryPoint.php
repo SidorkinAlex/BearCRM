@@ -54,10 +54,10 @@ if (!defined('PHP_VERSION_ID')) {
     define('PHP_VERSION_ID', ($version_array[0] * 10000 + $version_array[1] * 100 + $version_array[2]));
 }
 
-if (empty($GLOBALS['installing']) && !file_exists('config.php')) {
-    header('Location: install.php');
-    throw new Exception('SuiteCRM is not installed. Entry point needs an installed SuiteCRM, please install first.');
-}
+//if (empty($GLOBALS['installing']) && !file_exists('config.php')) {
+//    header('Location: install.php');
+//    throw new Exception('SuiteCRM is not installed. Entry point needs an installed SuiteCRM, please install first.');
+//}
 
 $BASE_DIR = realpath(dirname(__DIR__));
 $autoloader = $BASE_DIR.'/vendor/autoload.php';
@@ -67,15 +67,12 @@ if (file_exists($autoloader)) {
     die('Composer autoloader not found. please run "composer install"');
 }
 
-// config|_override.php
-if (is_file('config.php')) {
-    require_once 'config.php'; // provides $sugar_config
-}
 
-// load up the config_override.php file.  This is used to provide default user settings
-if (is_file('config_override.php')) {
-    require_once 'config_override.php';
-}
+$dotenv = Dotenv\Dotenv::createMutable(getcwd());
+$dotenv->load();
+require_once 'include/SugarObjects/SugarConfig.php';
+$sugar_config = SugarConfig::initConf();
+
 if (empty($GLOBALS['installing']) && empty($sugar_config['dbconfig']['db_name'])) {
     header('Location: install.php');
     exit();

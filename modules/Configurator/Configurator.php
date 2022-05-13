@@ -253,43 +253,25 @@ class Configurator
                 unset($overrideArray['authenticationClass']);
             }
         }
-
-        $overideString = "<?php\n/***CONFIGURATOR***/\n";
-
-        sugar_cache_put('sugar_config', $this->config);
-        $GLOBALS['sugar_config'] = $this->config;
-
-        //print_r($overrideArray);
-        //Bug#53013: Clean the tpl cache if action menu style has been changed.
-        if (isset($overrideArray['enable_action_menu']) &&
-                (!isset($this->previous_sugar_override_config_array['enable_action_menu']) ||
-                $overrideArray['enable_action_menu'] != $this->previous_sugar_override_config_array['enable_action_menu'])
-        ) {
-            require_once('modules/Administration/QuickRepairAndRebuild.php');
-            $repair = new RepairAndClear;
-            $repair->module_list = array();
-            $repair->clearTpls();
-        }
-
-        foreach ($overrideArray as $key => $val) {
-            if (in_array($key, $this->allow_undefined) || isset($sugar_config[$key])) {
-                if (is_string($val) && strcmp($val, 'true') == 0) {
-                    $val = true;
-                    $this->config[$key] = $val;
-                }
-                if (is_string($val) && strcmp($val, 'false') == 0) {
-                    $val = false;
-                    $this->config[$key] = false;
-                }
+        $overideString = [];
+        //TODO подготовить массив для записи данных в $overideString
+        foreach($overrideArray as $key => $value){
+            if (is_array($value)){
+                $overideString[$key] = json_encode($value);
+            } elseif (is_object($value)){
+                $overideString[$key] = serialize($value);
+            } else {
+                $overideString[$key] = $value;
             }
-            $overideString .= override_value_to_string_recursive2('sugar_config', $key, $val);
         }
-        $overideString .= '/***CONFIGURATOR***/';
-
-        $this->saveOverride($overideString);
+        if (count($overideString) > 0) {
+            $this->saveOverride($overideString);
+        }
+        sugar_cache_clear("sugar_config");
         if (isset($this->config['logger']['level']) && $this->logger) {
             $this->logger->setLevel($this->config['logger']['level']);
         }
+        $sugar_config =$this->config;
     }
 
     /**
@@ -343,17 +325,12 @@ class Configurator
         return $sugar_config;
     }
 
-    public function saveOverride($override)
+    public function saveOverride(array $override)
     {
-        require_once('install/install_utils.php');
-        if (!file_exists('config_override.php')) {
-            touch('config_override.php');
+        require_once 'include/utils/autoload/EnvDotEditor.php';
+        foreach ($override as $itemKey => $itemValue){
+            EnvDotEditor::saveENVConfig($itemKey,$itemValue);
         }
-        if (!(make_writable('config_override.php')) || !(is_writable('config_override.php'))) {
-            $GLOBALS['log']->fatal("Unable to write to the config_override.php file. Check the file permissions");
-            return;
-        }
-        sugar_file_put_contents('config_override.php', $override);
     }
 
     public function overrideClearDuplicates($array_name, $key)
