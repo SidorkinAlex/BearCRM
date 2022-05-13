@@ -837,7 +837,7 @@ class SugarView
         if (isset($this->bean->module_dir)) {
             $template->assign('MODULE_SUGAR_GRP1', $this->bean->module_dir);
         }
-        print_array($this->routeParser->getAction(),0,1);
+
         if ($this->routeParser->getAction() !== null) {
             $template->assign('ACTION_SUGAR_GRP1', $this->routeParser->getAction());
         }
