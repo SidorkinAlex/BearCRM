@@ -151,7 +151,6 @@ class LogicHook
                 $GLOBALS['log']->debug('Including module specific hook file for '.$custom);
             }
             include("$custom/logic_hooks.php");
-            print_array($hook_array,0,1);
         }
         if (empty($module_dir)) {
             $custom = "custom/application";
