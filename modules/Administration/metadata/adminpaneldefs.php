@@ -312,11 +312,18 @@ $admin_option_defs['Administration']['import'] = [
     './index.php?module=Import&action=step1&import_module=Administration',
     'import'
 ];
-$admin_option_defs['Administration']['module_loader'] = [
+$admin_option_defs['Administration']['module_loader_old'] = [
     'ModuleLoader',
     'LBL_MODULE_LOADER_TITLE',
     'LBL_MODULE_LOADER',
     './index.php?module=Administration&action=UpgradeWizard&view=module',
+    'module-loader'
+];
+$admin_option_defs['Administration']['module_loader'] = [
+    'ModuleLoader',
+    'LBL_MODULE_LOADER_TITLE',
+    'LBL_MODULE_LOADER',
+    './index.php?module=ModuleLoader&action=UpgradeWizard&view=module',
     'module-loader'
 ];
 if (!defined('TEMPLATE_URL')) {
