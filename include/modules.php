@@ -556,6 +556,9 @@ $modInvisList[] = 'SurveyQuestionOptions';
 $beanList['BOARD'] = 'BOARD';
 $beanFiles['BOARD'] = 'modules/BOARD/BOARD.php';
 $moduleList[] = 'BOARD';
+$beanList['ModuleLoader'] = 'ModuleLoader';
+$beanFiles['ModuleLoader'] = 'modules/ModuleLoader/ModuleLoader.php';
+$moduleList[] = 'ModuleLoader';
 
 
 if (file_exists('include/modules_override.php')) {
